@@ -1,3 +1,4 @@
+[CmdletBinding()]
 Param(
   [Parameter(Mandatory=$True,Position=1)]
     #Path
