@@ -13,8 +13,6 @@ Param(
     [string]$Filter = (Read-Host -Prompt 'Filter')
 )
 
-####
-
 
 $PathArray = @() 
 Get-ChildItem $Path -Filter $Filter -recurse |  
