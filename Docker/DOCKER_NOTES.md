@@ -3,7 +3,7 @@
 
 - https://docs.docker.com/get-started/
 
-# BASE VM
+# Base VM
 
 ```POWERSHELL
 C:\Users\Public\Documents\Hyper-V\Virtual Hard Disks\MobyLinuxVM.vhdx
@@ -11,12 +11,22 @@ C:\Users\Public\Documents\Hyper-V\Virtual Hard Disks\MobyLinuxVM.vhdx
 
 # Commands
 
-```CMD
+## Basics
+
+```Powershell
 docker help
 docker info
 docker container ls
 docker images
+docker run hello-worldh
+docker run -it ubuntu bash
 ```
+
+```Bash
+apt-get update
+apt-get install python3.7
+```
+
 ```CMD
 PS C:\WINDOWS\system32> docker images
 REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
@@ -24,7 +34,59 @@ REPOSITORY          TAG                 IMAGE ID            CREATED             
 python              3.7-alpine          1a8edcb29ce4        7 days ago          78.5MB
 ```
 
-# Help
+## Cheat-sheet
+
+```Powershell
+## List Docker CLI commands
+docker
+docker container --help
+
+## Display Docker version and info
+docker --version
+docker version
+docker info
+
+## Execute Docker image
+docker run hello-world
+
+## List Docker images
+docker image ls
+
+## List Docker containers (running, all, all in quiet mode)
+docker container ls
+docker container ls --all
+docker container ls -aq
+
+## Container related commands
+docker build -t friendlyhello .  # Create image using this directory's Dockerfile
+docker run -p 4000:80 friendlyhello  # Run "friendlyname" mapping port 4000 to 80
+docker run -d -p 4000:80 friendlyhello         # Same thing, but in detached mode
+docker container ls                                # List all running containers
+docker container ls -a             # List all containers, even those not running
+docker container stop <hash>           # Gracefully stop the specified container
+docker container kill <hash>         # Force shutdown of the specified container
+docker container rm <hash>        # Remove specified container from this machine
+docker container rm $(docker container ls -a -q)         # Remove all containers
+docker image ls -a                             # List all images on this machine
+docker image rm <image id>            # Remove specified image from this machine
+docker image rm $(docker image ls -a -q)   # Remove all images from this machine
+docker login             # Log in this CLI session using your Docker credentials
+docker tag <image> username/repository:tag  # Tag <image> for upload to registry
+docker push username/repository:tag            # Upload tagged image to registry
+docker run username/repository:tag                   # Run image from a registry
+
+## 'Services' commands
+docker stack ls                                            # List stacks or apps
+docker stack deploy -c <composefile> <appname>  # Run the specified Compose file
+docker service ls                 # List running services associated with an app
+docker service ps <service>                  # List tasks associated with an app
+docker inspect <task or container>                   # Inspect task or container
+docker container ls -q                                      # List container IDs
+docker stack rm <appname>                             # Tear down an application
+docker swarm leave --force      # Take down a single node swarm from the manager
+```
+
+## Help
 
 ```CMD
 PS C:\_Repositories> docker help
@@ -112,85 +174,163 @@ Commands:
 Run 'docker COMMAND --help' for more information on a command.
 ```
 
-# Image build
-
-#### Build docker image based on Dockerfile in same directory
-
-- Add a name before the . to gve the image a name
-docker build .
+## Run --help
 
 ```CMD
-PS C:\_Repositories\recipe-app-api> docker build .
+PS C:\_Repositories> docker run --help
 
-Sending build context to Docker daemon  66.05kBStep 1/12 : FROM python:3.7-alpine
-3.7-alpine: Pulling from library/python
-cd784148e348: Pull complete
-a5ca736b15eb: Pull complete
-f320f547ff02: Pull complete
-2edd8ff8cb8f: Pull complete
-9381128744b2: Pull complete
-Digest: sha256:f708ad35a86f079e860ecdd05e1da7844fd877b58238e7a9a588b2ca3b1534d8
-Status: Downloaded newer image for python:3.7-alpine
- ---> 1a8edcb29ce4
-Step 2/12 : LABEL filename="Dockerfile"
- ---> Running in 3c37c3c193dd
-Removing intermediate container 3c37c3c193dd
- ---> 5011608cc895
-Step 3/12 : LABEL baseImage="python:3.7-alpine"
- ---> Running in 0d1ca6385115
-Removing intermediate container 0d1ca6385115
- ---> 9db8908b569a
-Step 4/12 : LABEL author="ChristopherStavros"
- ---> Running in 2b9443dd16f3
-Removing intermediate container 2b9443dd16f3
- ---> ca6a582d7d32
-Step 5/12 : ENV PYTHONUNBUFFERED 1
- ---> Running in 8e4797316ed3
-Removing intermediate container 8e4797316ed3
- ---> c522a0ddbad0
-Step 6/12 : COPY ./requirements.txt /requirements.txt
- ---> 81cfdd851e70
-Step 7/12 : RUN pip install -r /requirements.txt
- ---> Running in ebedf5b453b7
-Collecting Django<2.2.0,>=2.1.4 (from -r /requirements.txt (line 1))
-  Downloading https://files.pythonhosted.org/packages/fd/9a/0c028ea0fe4f5803dda1a7afabeed958d0c8b79b0fe762ffbf728db3b90d/Django-2.1.4-py3-none-any.whl (7.3MB)Collecting djangorestframework<3.10.0,>=3.9.0 (from -r /requirements.txt (line 2))
-  Downloading https://files.pythonhosted.org/packages/99/0b/d37a5a96c5d301e23adcabcc2f3fa659fb34e6308590f95ebb50cdbe98a1/djangorestframework-3.9.0-py2.py3-none-any.whl (924kB)
-Collecting pytz (from Django<2.2.0,>=2.1.4->-r /requirements.txt (line 1))
-  Downloading https://files.pythonhosted.org/packages/f8/0e/2365ddc010afb3d79147f1dd544e5ee24bf4ece58ab99b16fbb465ce6dc0/pytz-2018.7-py2.py3-none-any.whl (506kB)
-Installing collected packages: pytz, Django, djangorestframework
-Successfully installed Django-2.1.4 djangorestframework-3.9.0 pytz-2018.7
-Removing intermediate container ebedf5b453b7
- ---> a0a9ef7ead0a
-Step 8/12 : RUN mkdir /app
- ---> Running in 53f47136b302
-Removing intermediate container 53f47136b302
- ---> 1c673e08108d
-Step 9/12 : WORKDIR /app
- ---> Running in d649487d2822
-Removing intermediate container d649487d2822
- ---> f34006210311
-Step 10/12 : COPY ./app /app
- ---> ac5826fb748f
-Step 11/12 : RUN adduser -D user
- ---> Running in a829c83251d8
-Removing intermediate container a829c83251d8
- ---> e1107001da02
-Step 12/12 : USER user
- ---> Running in 06c1528e3346
-Removing intermediate container 06c1528e3346
- ---> b6ffd31fa5d8
-Successfully built b6ffd31fa5d8
-SECURITY WARNING: You are building a Docker image from Windows against a non-Windows Docker host. All files and directories added to build context will have '-rwxr-xr-x' permissions. It is recommended to double check and reset permissions for sensitive files and directories.
+Usage:  docker run [OPTIONS] IMAGE [COMMAND] [ARG...]
+
+Run a command in a new container
+
+Options:
+      --add-host list                  Add a custom host-to-IP mapping
+                                       (host:ip)
+  -a, --attach list                    Attach to STDIN, STDOUT or STDERR
+      --blkio-weight uint16            Block IO (relative weight),
+                                       between 10 and 1000, or 0 to
+                                       disable (default 0)
+      --blkio-weight-device list       Block IO weight (relative device
+                                       weight) (default [])
+      --cap-add list                   Add Linux capabilities
+      --cap-drop list                  Drop Linux capabilities
+      --cgroup-parent string           Optional parent cgroup for the
+                                       container
+      --cidfile string                 Write the container ID to the file
+      --cpu-period int                 Limit CPU CFS (Completely Fair
+                                       Scheduler) period
+      --cpu-quota int                  Limit CPU CFS (Completely Fair
+                                       Scheduler) quota
+      --cpu-rt-period int              Limit CPU real-time period in
+                                       microseconds
+      --cpu-rt-runtime int             Limit CPU real-time runtime in
+                                       microseconds
+  -c, --cpu-shares int                 CPU shares (relative weight)
+      --cpus decimal                   Number of CPUs
+      --cpuset-cpus string             CPUs in which to allow execution
+                                       (0-3, 0,1)
+      --cpuset-mems string             MEMs in which to allow execution
+                                       (0-3, 0,1)
+  -d, --detach                         Run container in background and
+                                       print container ID
+      --detach-keys string             Override the key sequence for
+                                       detaching a container
+      --device list                    Add a host device to the container
+      --device-cgroup-rule list        Add a rule to the cgroup allowed
+                                       devices list
+      --device-read-bps list           Limit read rate (bytes per second)
+                                       from a device (default [])
+      --device-read-iops list          Limit read rate (IO per second)
+                                       from a device (default [])
+      --device-write-bps list          Limit write rate (bytes per
+                                       second) to a device (default [])
+      --device-write-iops list         Limit write rate (IO per second)
+                                       to a device (default [])
+      --disable-content-trust          Skip image verification (default true)
+      --dns list                       Set custom DNS servers
+      --dns-option list                Set DNS options
+      --dns-search list                Set custom DNS search domains
+      --entrypoint string              Overwrite the default ENTRYPOINT
+                                       of the image
+  -e, --env list                       Set environment variables
+      --env-file list                  Read in a file of environment variables
+      --expose list                    Expose a port or a range of ports
+      --group-add list                 Add additional groups to join
+      --health-cmd string              Command to run to check health
+      --health-interval duration       Time between running the check
+                                       (ms|s|m|h) (default 0s)
+      --health-retries int             Consecutive failures needed to
+                                       report unhealthy
+      --health-start-period duration   Start period for the container to
+                                       initialize before starting
+                                       health-retries countdown
+                                       (ms|s|m|h) (default 0s)
+      --health-timeout duration        Maximum time to allow one check to
+                                       run (ms|s|m|h) (default 0s)
+      --help                           Print usage
+  -h, --hostname string                Container host name
+      --init                           Run an init inside the container
+                                       that forwards signals and reaps
+                                       processes
+  -i, --interactive                    Keep STDIN open even if not attached
+      --ip string                      IPv4 address (e.g., 172.30.100.104)
+      --ip6 string                     IPv6 address (e.g., 2001:db8::33)
+      --ipc string                     IPC mode to use
+      --isolation string               Container isolation technology
+      --kernel-memory bytes            Kernel memory limit
+  -l, --label list                     Set meta data on a container
+      --label-file list                Read in a line delimited file of labels
+      --link list                      Add link to another container
+      --link-local-ip list             Container IPv4/IPv6 link-local
+                                       addresses
+      --log-driver string              Logging driver for the container
+      --log-opt list                   Log driver options
+      --mac-address string             Container MAC address (e.g.,
+                                       92:d0:c6:0a:29:33)
+  -m, --memory bytes                   Memory limit
+      --memory-reservation bytes       Memory soft limit
+      --memory-swap bytes              Swap limit equal to memory plus
+                                       swap: '-1' to enable unlimited swap
+      --memory-swappiness int          Tune container memory swappiness
+                                       (0 to 100) (default -1)
+      --mount mount                    Attach a filesystem mount to the
+                                       container
+      --name string                    Assign a name to the container
+      --network string                 Connect a container to a network
+                                       (default "default")
+      --network-alias list             Add network-scoped alias for the
+                                       container
+      --no-healthcheck                 Disable any container-specified
+                                       HEALTHCHECK
+      --oom-kill-disable               Disable OOM Killer
+      --oom-score-adj int              Tune host's OOM preferences (-1000
+                                       to 1000)
+      --pid string                     PID namespace to use
+      --pids-limit int                 Tune container pids limit (set -1
+                                       for unlimited)
+      --privileged                     Give extended privileges to this
+                                       container
+  -p, --publish list                   Publish a container's port(s) to
+                                       the host
+  -P, --publish-all                    Publish all exposed ports to
+                                       random ports
+      --read-only                      Mount the container's root
+                                       filesystem as read only
+      --restart string                 Restart policy to apply when a
+                                       container exits (default "no")
+      --rm                             Automatically remove the container
+                                       when it exits
+      --runtime string                 Runtime to use for this container
+      --security-opt list              Security Options
+      --shm-size bytes                 Size of /dev/shm
+      --sig-proxy                      Proxy received signals to the
+                                       process (default true)
+      --stop-signal string             Signal to stop a container
+                                       (default "15")
+      --stop-timeout int               Timeout (in seconds) to stop a
+                                       container
+      --storage-opt list               Storage driver options for the
+                                       container
+      --sysctl map                     Sysctl options (default map[])
+      --tmpfs list                     Mount a tmpfs directory
+  -t, --tty                            Allocate a pseudo-TTY
+      --ulimit ulimit                  Ulimit options (default [])
+  -u, --user string                    Username or UID (format:
+                                       <name|uid>[:<group|gid>])
+      --userns string                  User namespace to use
+      --uts string                     UTS namespace to use
+  -v, --volume list                    Bind mount a volume
+      --volume-driver string           Optional volume driver for the
+                                       container
+      --volumes-from list              Mount volumes from the specified
+                                       container(s)
+  -w, --workdir string                 Working directory inside the container
 ```
 
-# Requirements.txt example
+# Dockerfile example
 
-```txt
-Django>=2.1.4,<2.2.0
-djangorestframework>=3.9.0,<3.10.0
-```
-
-# Docker file example
+- Place file in root of project folder
+    - Dockerfile (no extension)
 
 ```DOCKER
 #IMAGE NAME - Add a base image and then just add the customize bits for you particular project
@@ -219,3 +359,66 @@ COPY ./app /app
 RUN adduser -D user
 USER user
 ```
+
+# requirements.txt example
+
+- Place file in root of project folder
+    - requirements.txt
+
+```txt
+Django>=2.1.4,<2.2.0
+djangorestframework>=3.9.0,<3.10.0
+```
+
+# Image build
+
+- Build docker image based on Dockerfile in same directory
+
+- Add a name before the . to give the image a name
+docker build .
+
+```Powershell
+#Run from project directory
+PS C:\_Repositories\recipe-app-api> docker build .
+```
+
+# Docker Compose
+
+- A tool that allows us to easily run our Docker image from our project location
+- Manage the different services that make up our project
+    - Python
+    - Database
+    - Etc.
+- Place file in root of project folder
+    - docker-compose.yml
+
+### docker-compose.yml example
+
+```yml
+version: "3"
+
+services:
+  app:
+    build:
+      context: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./app:/app
+    command: >
+      sh -c "python manage.py runserver 0.0.0.0:8000"
+```
+### docker-compose build
+
+- This builds a new image using the project name
+
+```Powershell
+#Run from project directory
+docker-compose build
+```
+
+#### Run container interactively
+
+```Powershell
+docker run -ti recipe-app-api_app:latest
+``` 
