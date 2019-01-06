@@ -408,6 +408,7 @@ services:
     command: >
       sh -c "python manage.py runserver 0.0.0.0:8000"
 ```
+
 ### docker-compose build
 
 - This builds a new image using the project name
@@ -421,4 +422,135 @@ docker-compose build
 
 ```Powershell
 docker run -ti recipe-app-api_app:latest
-``` 
+```
+
+#### Build Django app
+
+```PowerShell
+#Creates Django project files in app folder
+docker-compose run app sh -c "django-admin.py startproject app ."
+```
+
+#### Firewall error resolution
+
+```Powershell
+#Run from project directory
+docker-compose run app sh -c "django-admin.py startproject app ."
+
+Creating network "recipe-app-api_default" with the default driver
+ERROR: Cannot create container for service app: b'Drive sharing seems blocked by a firewall'
+
+#Allows you to set C drive for sharing
+#This worked for me temporarily but after a reboot the networks reset
+#So then I allowed file and printer sharing for public networks
+Set-NetConnectionProfile -interfacealias "Wi-Fi" -NetworkCategory Private
+Set-NetConnectionProfile -interfacealias "vEthernet (DockerNAT)" -NetworkCategory Private
+```
+
+# calc.py
+
+```python
+def add(x, y):
+    # Add two numbers together
+    return x + y
+
+
+def subtract(x, y):
+    # Subtract two numbers
+    return y - x
+```
+# test.py example
+### place test.py in Django app directory or in subfolder named test (test/test_something.py for example)
+```python
+from django.test import TestCase
+
+from app.calc import add, subtract
+
+
+class CalcTests(TestCase):
+
+    def test_add_numbers(self):
+        # Test that two numbers are added together
+        self.assertEqual(add(3, 8), 11)
+
+    def test_subtract_number(self):
+        # Test that values are subtracted and returned
+        self.assertEqual(subtract(5, 11), 6)
+```
+
+# .flake8 example (linting)
+
+```flake8
+[flake8]
+exclude = 
+    migrations,
+    __pycache__,
+    manage.py,
+    settings.py
+```
+
+# Run unit tests
+
+```Powershell
+#run from project folder
+docker-compose run app sh -c "python manage.py test"
+
+#include linting with flake8
+docker-compose run app sh -c "python manage.py test && flake8"
+```
+
+# Travis CI example
+
+#### .travis.yml
+
+```yml
+language : python
+python : 
+  - "3.6"
+services:
+  - docker
+
+before_script: pip install docker-compose
+
+script:
+  - docker-compose run app sh -c "python manage.py test && flake8"
+```
+
+# Build core Django app
+#### creates core app in core directory
+
+```powershell
+docker-compose run app sh -c "python manage.py startapp core"
+```
+
+# Add 'core' to installed apps list in Django app/settings.py file
+
+```python
+# Application definition
+
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'core'
+]
+```
+
+# Created new tests, user model
+
+- app/core/tests/test_models.py
+- app/core/models.py
+- app/app/settings.py
+
+# Build Migrations
+
+- Essentially tell Django to update it's database with new models
+- Every time you make a change to models, you need to run a new migration
+- Adds file like 0001_initial.py to core/migrations folder
+
+```powershell
+docker-compose run app sh -c "python manage.py makemigrations core"
+```
