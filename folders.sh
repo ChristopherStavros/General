@@ -1,0 +1,2 @@
+mkdir Desktop
+mkdir Downloads
