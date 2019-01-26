@@ -163,25 +163,39 @@ random.randint(1,100)
 
 ## String methods
 
+**Note:** String are immutable! (cannot be changed)
+
+### split()
+
 ```python
-#String are immutable! (cannot be changed)
-
-#Split
 lst = "1,2,3,4,5".split(",") # ['1', '2', '3', '4', '5']
+```
 
-#More string methods
+### Dealing with upper and lower case letters
+
+```python
 x = "Hello".upper() #convert to upper case
 x = "Hello".lower() #Convert to lower case
 x = "Hello".isupper() # returns True if all letters are upper case
 x = "Hello".islower() # returns True if all letters are lower case
+```
+
+### replace()
+
+```python
+x = "Birdman".replace("Bird", "Bat" # Batman
+)
+```
+
+### More string methods
+
+```python
 x = "Hello".startswith("H") # True
 x = "Hello".endswith("o") # True
 x = "Hello".isalpha # True if string is alphabetical
 x = "Hello   ".strip() #strip blank spaces from beginning or end
 x = "spamspamHellospamspam".strip("maps") #strip specific character(s) from beginning or end - strips all characters in any order
 x = ', '.join("cats", "dogs") # cats, dogs
-x = "Birdman".replace("Bird", "Bat" # Batman
-)
 #more string methods include rstrip(), lstrip(), rjust(), ljust()
 ```
 
@@ -320,12 +334,23 @@ class User:
      # set parameters for object
     def __init__(self, name):
         self.name = name
-        self.items = []
 
     # define a string that represents the object
     def __repr__(self):
         return "<User {}>".format(self.name)
+
+    @classmethod
+    def do_something(cls):
+        return "This is a class method"
 ```
+
+```python
+my_user = User('Hans_Gruber')
+
+User.do_something()
+```
+
+**Note:** 'self' refers to the **currently bound object** (my_user, in the example above)
 
 ## Lambda functions
 

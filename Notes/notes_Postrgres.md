@@ -67,24 +67,6 @@ FROM customers
 LIMIT 1;
 ```
 
-## UPDATE
-
-Update specific values
-
-```sql
-UPDATE items
-SET price = 4.00
-WHERE id = 3;
-```
-
-## DELETE rows
-
-Delete rows that meet specific criteria
-
-```sql
-DELETE FROM items WHERE id=4;
-```
-
 ## LIKE
 
 Use LIKE for more advanced filtering
@@ -286,13 +268,31 @@ INSERT INTO public.users(id, name)
 VALUES (1, 'hans_gruber');
 ```
 
+## UPDATE values
+
+Update specific values
+
+```sql
+UPDATE items
+SET price = 4.00
+WHERE id = 3;
+```
+
+## DELETE rows
+
+Delete rows that meet specific criteria
+
+```sql
+DELETE FROM items WHERE id=4;
+```
+
 ## Sequences (this is unique to Postgres - many other systems use "auto-increment")
 
 ```sql
 CREATE SEQUENCE users_id_seq START 3; --replace default value with the sequence
 ```
 
-## ALTER TABLE
+## Modifying tables - ALTER TABLE
 
 ```sql
 ALTER TABLE public.users
@@ -300,4 +300,17 @@ ALTER COLUMN id
 SET DEFAULT nextval('users_id_seq');
 
 ALTER SEQUENCE users_id_seq OWNED BY public.users.id
+```
+
+## SERIAL data type
+
+Creates a SEQUENCE
+
+```sql
+CREATE TABLE test(
+    id SERIAL PRIMARY KEY, -- Creates a sequences starting at 1
+    name text -- same as CHARACTER VARYING(255) without the upper limit
+)
+
+INSERT INTO test(name) VALUES ('Steez')
 ```
