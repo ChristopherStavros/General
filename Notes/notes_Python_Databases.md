@@ -134,3 +134,6 @@ connection_pool.putconn(connection)
 
 **Note:** This code is still a problem because you need to put the connection back into the pool every time.  IF you were to return some values and where then unable to return the connection, this could cause an error to be thrown.  
 We still need to find a way to use the 'with' construct here, whcih will require some more programming as psycopg2 does not handle this out of the box.
+
+## Using 'with' and connection pools
+
