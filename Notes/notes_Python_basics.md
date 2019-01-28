@@ -352,6 +352,10 @@ User.do_something()
 
 **Note:** 'self' refers to the **currently bound object** (my_user, in the example above)
 
+## Class methods and static methods
+
+https://stackoverflow.com/questions/136097/what-is-the-difference-between-staticmethod-and-classmethod
+
 ## Lambda functions
 
 ```python
