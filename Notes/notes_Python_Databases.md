@@ -1,4 +1,4 @@
-# Postgres
+# Getting started
 
 ## Install pyscopg2
 
@@ -20,7 +20,7 @@ for row in cursor:
     print(row)
 ```
 
-## Database connections
+# Connections
 
 To make a database connections the following arguments need to be passed to the psycopg2.connect() method.
 
@@ -56,7 +56,7 @@ A cursor i something that lets you:
 cursor = connection.cursor()
 ```
 
-### Better
+## Better
 
 ```python
 # This is a better practice than the code above since you should close your curser when you are finished using it
@@ -68,7 +68,7 @@ with connection.cursor() as cursor:
     connection.close()
 ```
 
-### Even better
+## Even better
 
 ```python
 # This is a better practice than the code above because we always want to commit our changes and close the connection
@@ -78,7 +78,7 @@ with psycopg2.connect(host = "localhost", database="learning", user = "postgres"
                     (self.email, self.first_name, self.last_name))
 ```
 
-### Better still
+## Better still
 
 ```python
 # Define the connection string in a separate function in database.py to make code more succinct
@@ -104,14 +104,14 @@ with connect() as connection:
 - This be be illustrated when using sequences.  The sequence will still increment even though no data is commited.
 - Usng the 'with' construct will automatically commit changes and close the connection
 
-## Connection pools
+# Connection pools
 
 - Creating database connections is one of the slower parts of interacting with the database
 - This means we cannot use ```with connect() as connection:```, as it will close the connection
 - Connection pools should be used
 - Connection pools with require you to put each connection back into the pool, once they are finished being used
 
-### ...and better still (but still not great)- using Connection pools...incorrectly
+## ...and better still (but still not great)- using Connection pools...incorrectly
 
 ```python
 # Create a connection pool in a separate function in database.py to make code more succinct
@@ -135,7 +135,7 @@ connection_pool.putconn(connection)
 **Note:** This code is still a problem because you need to put the connection back into the pool every time.  IF you were to return some values and where then unable to return the connection, this could cause an error to be thrown.  
 We still need to find a way to use the 'with' construct here, which will require some more programming as psycopg2 does not handle this out of the box.
 
-### Using 'with' and connection pools - still not quite right
+## Using 'with' and connection pools - still not quite right
 
 **Note:** This attempt is using the with construct to create connection pools, however while the run works, it actually creates multiple connection pools, which is even more inefficient that just creating multiple connection (as in on the the earlier examples).  With this current code, a new connection pool object is created every time that ```with ConnectionPool() as connection:``` runs.  This is bad.
 
@@ -146,7 +146,7 @@ from psycopg2 import pool
 
 class ConnectionPool:
     def __init__(self):
-        connection_pool = pool.SimpleConnectionPool(1, 1,  #maxconn...number of initial connections, max number of connections pool can handle
+        connection_pool = pool.SimpleConnectionPool(1, 10,  #maxconn...number of initial connections, max number of connections pool can handle
                                             host = "localhost", 
                                             database="learning", 
                                             user = "postgres", 
@@ -171,16 +171,16 @@ def save_to_db(self):
                         (self.email, self.first_name, self.last_name))
 ```
 
-### One more time!  Best! - Connection pools implemented properly!
+## Still better! - Connection pools implemented properly, but with some redundant code
 
-**Note:** This version is the best.  This time, when '__init__' is called , new connection pool object is not created however a connection to the pool occurs when the '\__enter\__' function runs, and disconnects (and commits!) when the '\__exit\__' function runs.
+**Note:** This version is better still.  This time, when '__init__' is called , new connection pool object is not created however a connection to the pool occurs when the '\__enter\__' function runs, and disconnects (and commits!) when the '\__exit\__' function runs.
 
 database.py
 
 ```python
 from psycopg2 import pool
 
-connection_pool = pool.SimpleConnectionPool(1, 1,  #maxconn...number of initial connections, max number of connections pool can handle
+connection_pool = pool.SimpleConnectionPool(1, 10,  #maxconn...number of initial connections, max number of connections pool can handle
                                     host = "localhost", 
                                     database="learning", 
                                     user = "postgres", 
@@ -212,3 +212,81 @@ def save_to_db(self):
             cursor.execute('INSERT INTO users (email, first_name, last_name) VALUES (%s, %s, %s)', 
                         (self.email, self.first_name, self.last_name))
 ```
+
+## More details on the '\__exit\__' function
+
+### Arguments
+
+It is a good practice to handle errors within the '\__exit__\' function
+
+- self
+- exception_type
+- exception_value
+- exception_traceback
+
+```python
+def __exit__(self, exception_type, exception_value, exception_traceback):
+    if exception_value is not None:
+        self.connection.rollback()
+    else:
+        self.cursor.close()
+        self.connection.commit()
+    connection_pool.putconn(self.connection)
+```
+
+## Still better...in many situations but not all
+
+**Note:** This version is removes the redundant code from the previous version, but does have a couple downsides.  
+
+- No longer able to perform multiple operations with the same cursor
+  - If your app requires a lot of database writes, then this may not be the best option
+- We also lose the ability to roll back a connection...unless we handle it in the '\__exit\__' function, which we will do here
+
+database.py
+
+```python
+from psycopg2 import pool
+
+connection_pool = pool.SimpleConnectionPool(1, 10,  #maxconn...number of initial connections, max number of connections pool can handle
+                                    host = "localhost", 
+                                    database="learning", 
+                                    user = "postgres", 
+                                    password = "P@ssw0rd")
+
+class CursorFromConnectionFromPool:
+    def __init__(self):
+        self.connection = None
+        self.cursor = None
+
+    def __enter__(self):
+        self.connection = connection_pool.getconn()
+        self.cursor = self.connection.cursor()
+        return self.cursor
+
+    def __exit__(self, exception_type, exception_value, exception_traceback):
+        if exception_value is not None:
+            self.connection.rollback()
+        else:
+            self.cursor.close()
+            self.connection.commit()
+        connection_pool.putconn(self.connection)
+```
+
+**Note:** Commit() is required even though we are using 'with' because the connection to the pool actually occurs outside the the 'ConnectionFromPool' class, so we still have to commit here
+
+Another file (excerpt)
+
+```python
+from database import CursorFromConnectionFromPool
+
+def save_to_db(self):
+    with CursorFromConnectionFromPool() as connection:
+        with connection.cursor() as cursor:
+            cursor.execute('INSERT INTO users (email, first_name, last_name) VALUES (%s, %s, %s)', 
+                        (self.email, self.first_name, self.last_name))
+```
+
+# More on imports
+
+- from users import User
+  - a file is run to make classes within the file available
