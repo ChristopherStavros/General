@@ -224,18 +224,13 @@ CREATE DATABASE steezcorp
 
 ## CREATE (and DROP) TABLE
 
-Very basic table
-
 ```sql
-DROP TABLE IF EXISTS public.users;
-
 CREATE TABLE public.users (
     id INTEGER PRIMARY KEY,
     name CHARACTER varying(100) NOT NULL
 )
 
 -- OR
-DROP TABLE IF EXISTS public.users;
 
 CREATE TABLE public.users (
     id INTEGER,
@@ -244,11 +239,31 @@ CREATE TABLE public.users (
 )
 ```
 
+## DROP TABLE (or DROP DATABASE, SEQUENCE, more)
+
+```sql
+DROP TABLE public.users;
+
+-- RESTRICT is appended by default
+
+DROP TABLE public.users RESTRICT;
+```
+
+### Use DROP CASCADE to delete any foreign key relationships as well
+
+```sql
+DROP TABLE public.users CASCADE;
+```
+
+### DROP TABLE testing for existence
+
+```sql
+DROP TABLE IF EXISTS public.users;
+```
+
 ## FOREIGN KEY
 
 ```sql
-DROP TABLE IF EXISTS public.videos;
-
 CREATE TABLE public.videos (
     id INTEGER PRIMARY KEY,
     user_id INTEGER REFERENCES public.users, -- FOREIGN KEY
@@ -314,3 +329,69 @@ CREATE TABLE test(
 
 INSERT INTO test(name) VALUES ('Steez')
 ```
+
+# ADVANCED SQL
+
+## INDEXES
+
+- Think of the primary key as the word in a dictionary and the other columns as the definition.
+- To allows a table to perform searches more efficiently, create indexes
+- The primary key is is an index by default
+  - The primary key is a 'unique index', a special kind of index
+- Indexes are stored in a binary tree
+- Indexes can become corrupted so it is important to periodically reindex your data
+
+### Single column indexes
+
+```sql
+CREATE INDEX index_name ON table_name(column_name)
+```
+
+### Multi-column indexes
+
+- It is more efficient to create a multicolumn idnex if you are performing a log of multicolumn filtering
+- This only useful when you are doing 'AND' filtering
+- You generally don't want to create multi-column indexes
+
+```sql
+CREATE INDEX index_name ON table_name(column1_name, column2_name)
+```
+
+## REINDEX
+
+- Indexes can become corrupted so it is important to periodically reindex your data
+  - Reindexing will delete the existing index and rebuild it
+- indexes can also use a lot of disk space over time if there are a lot of updates, so reindexing will also help with this
+
+### REINDEX specific INDEX
+
+```sql
+REINDEX INDEX index_name
+```
+
+### REINDEX ALL indexes in a TABLE
+
+```sql
+REINDEX TABLE table_name
+```
+
+### REINDEX ALL indexes in a DATABASE
+
+```sql
+REINDEX DATABASE database_name
+```
+
+## VIEWs
+
+```sql
+DROP VIEW total_revenue_per_customer;
+
+CREATE VIEW total_revenue_per_customer AS
+SELECT customers.first_name, customers.last_name, sum(items.price) FROM customers
+INNER JOIN purchases on customers.id = purchases.customer_id
+INNER JOIN items on purchases.item_id = items.id
+GROUP BY  customers.id;
+
+CREATE VIEW awesome_customers AS
+SELECT * FROM total_revenue_per_customer WHERE sum > 150;
+``` 
