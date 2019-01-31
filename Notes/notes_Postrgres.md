@@ -395,3 +395,34 @@ GROUP BY  customers.id;
 CREATE VIEW awesome_customers AS
 SELECT * FROM total_revenue_per_customer WHERE sum > 150;
 ``` 
+
+### INSERT VALUES into VIEWs
+
+```sql
+CREATE VIEW expensive_items AS
+SELECT * FROM items WHERE price >= 100;
+
+INSERT INTO expensive_items(id, name, price)
+VALUES (10, 'DSLR', 400.00);
+```
+
+### Preventing an INSERT where criteria doesn't match
+
+```sql
+CREATE VIEW expensive_items AS
+SELECT * FROM items WHERE price >= 100
+WITH LOCAL CHECK OPTION;  -- postgres ONLY
+-- this will limit INSERT to only items that match the WHERE criteria
+
+INSERT INTO expensive_items(id, name, price)
+VALUES (11, 'Pencil', 2.00);
+```
+
+**NOTE:** Without using the ```WITH LOCAL CHECK OPTION```,  this code will throw an error:  
+
+```new row violates check option for view "expensive_items"```
+
+**Note:** ```WITH LOCAL CHECK OPTION``` will only check the current VIEW (local) not parent or related VIEWs
+
+```WITH CASCADED CHECK OPTION``` will check related VIEWs as well
+
