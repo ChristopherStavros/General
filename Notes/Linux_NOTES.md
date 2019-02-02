@@ -1,111 +1,141 @@
-# Notes
+# Resources
 
 [Integraton tools and screen resolution](https://www.ceos3c.com/hacking/changing-screen-resolution-kali-linux-hyper-v/)
 
-## Basic Linux Commands
+# Basic Linux Commands - Debian based distros (tested on Kali and Ubuntu)
 
-Shutdown and restart
+### Shutdown and restart
 
 ```bash
 #Restart
-
 restart
 shutdown -r now
 
 #Shutdown
-
 shutdown -P now
 ```
 
-Clear screen
+### Get current user
+
+```bash
+whoami
+```
+
+### Switch user
+
+```bash
+su other_user
+```
+
+### Clear screen
 
 ```bash
 clear
 ```
 
-Get info for a command
+### Get info for a command
 
 ```bash
-man ls
-man pwd
+man <command>
 ```
 
-Help
+### Help
 
 ```bash
 ls --help
 ```
 
-List files and folders
+### List files and folders
 
 ```bash
 ls
 ls -la
 ```
 
-Change directory
+### Change directory
 
 ```bash
 cd
 cd /root
 ```
 
-Get current directory
+### Get current directory
 
 ```bash
 pwd
 ```
 
-Make directory
+### Make directory
 
 ```bash
 mkdir
 ```
 
-Remove empty directory
+### Remove empty directory
 
 ```bash
 rmdir /My_Directory
 ```
 
-Remove non-empty directory
+### Remove non-empty directory
 
 ```bash
 rm -rf /My_Directory
 ```
 
-Create text file
+### Create text file
 
 ```bash
 touch my_file.txt
 > my_file.txt
 ```
 
-Remove file
+### Remove file
 
 ```bash
 rm my_file
 ```
 
-Copy file
+### Copy file
 
 ```bash
-cp folders.sh Repostories/general/
+cp file SomeFolder
 ```
 
-## Installing programs
+### Monitor a program process
+
+```bash
+#example
+watch git status
+```
+
+# Installing programs
+
+### apt or apt-get
 
 ```bash
 # Get list of programs available for install
-
-apt-get update
+apt update
 
 # Install a program
-
-apt-get install terminator
+apt install python3-pip
 ```
 
-[Resolve unable to locate packages error](https://iamjagjeetubhi.wordpress.com/2017/04/10/fix-unable-to-locate-package-error-in-kali-linux/)
+### Some essential items to install
+
+#### tree - for files system tree view
+
+```bash
+apt install tree
+```
+
+#### emacs - text editor
+
+```bash
+apt install emacs
+```
+
+### [Kali - resolve unable to locate packages error](https://iamjagjeetubhi.wordpress.com/2017/04/10/fix-unable-to-locate-package-error-in-kali-linux/)
 
 - Open /etc/apt/sources.list in a text editor
 - Copy in the following text
@@ -122,25 +152,30 @@ apt-get install terminator
         # For source package access, uncomment the following line
         # deb-src http://old.kali.org/kali moto main non-free contrib
 
-## Network
+# Network
 
-Get network information
+### Install network tools
+
+```bash
+apt-get install net-tools
+apt-get install iputils-ping
+```
+
+### Get network information
 
 ```bash
 ifconfig
 ```
 
-Disable/Enable network interface
+### Disable/Enable network interface
 
 ```bash
 # For the first parameter, specify the netwrok interface you want to change
-
 ifconfig eth0 down
-
 ifconfig eth0 up
 ```
 
-Change MAC address
+### Change MAC address
 
 ```bash
 ifconfig eth0 down

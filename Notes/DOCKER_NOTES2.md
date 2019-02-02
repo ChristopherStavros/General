@@ -18,7 +18,7 @@ Much of the content below is derived from the following resources:
 
 Instructions for installing Docker on a particular OS are on [Docker Docs](https://docs.docker.com) site.
 
-***Note:*** When using Docker for Windows with Hyper-V, a base VM will be created in the follwoing location.
+***Note:*** When using Docker for Windows with Hyper-V, a base VM will be created in the following location.
 
 ```powershell
 C:\Users\Public\Documents\Hyper-V\Virtual Hard Disks\MobyLinuxVM.vhdx
@@ -77,17 +77,17 @@ docker COMMAND --help
 # These containers will be ephemeral
 # The container will stop once the command completes
 docker container run alpine:3.6 uptime
-docker container run alpine ps
-docker container run alpine uname -a
-docker container run alpine date
-docker container run --name 'mycontainer' alpine date
 
-# List containers
+docker container run --name 'mycontainer' alpine date
+```
+
+## List containers
+
+```powershell
 docker ps       # show running containers
 docker ps -l    # show latest created container
 docker ps -n 2  # show last 'n' number of containers
 docker ps -a    # show ALL containers
-
 ```
 
 ## Persisting containers
