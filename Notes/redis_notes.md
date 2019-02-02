@@ -101,6 +101,7 @@ get_value("foo")
 
 # Sources
 
-https://codeburst.io/redis-what-and-why-d52b6829813  
-https://redis.io/topics/rediscli
+[Blog post - intro](https://codeburst.io/redis-what-and-why-d52b6829813)  
+[CLI - docs](https://redis.io/topics/rediscli)  
+[Forum - Connection pools](https://stackoverflow.com/questions/31663288/how-do-i-properly-use-connection-pools-in-redis)
 
