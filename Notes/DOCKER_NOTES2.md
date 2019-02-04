@@ -20,7 +20,7 @@ Instructions for installing Docker on a particular OS are on [Docker Docs](https
 
 ***Note:*** When using Docker for Windows with Hyper-V, a base VM will be created in the following location.
 
-```powershell
+```bash
 C:\Users\Public\Documents\Hyper-V\Virtual Hard Disks\MobyLinuxVM.vhdx
 ```
 
@@ -28,7 +28,7 @@ C:\Users\Public\Documents\Hyper-V\Virtual Hard Disks\MobyLinuxVM.vhdx
 
 ***Note:*** Run Docker commands using PowerShell or Linux shell
 
-```powershell
+```bash
 # Run sample application - Smoke-test
 docker run hello-world
 
@@ -72,7 +72,7 @@ docker COMMAND --help
 
 ***Note:*** Launching *'docker run'* or *'docker container run'* commands will **always** create a new container
 
-```powershell
+```bash
 # Run container along with a command
 # These containers will be ephemeral
 # The container will stop once the command completes
@@ -83,7 +83,7 @@ docker container run --name 'mycontainer' alpine date
 
 ## List containers
 
-```powershell
+```bash
 docker ps       # show running containers
 docker ps -l    # show latest created container
 docker ps -n 2  # show last 'n' number of containers
@@ -92,7 +92,7 @@ docker ps -a    # show ALL containers
 
 ## Persisting containers
 
-```powershell
+```bash
 # Run interactive programs
 docker container run -it alpine sh
 docker container run -it ubuntu bash
@@ -101,9 +101,24 @@ docker container run -it ubuntu bash
 docker container run -idt alpine sh
 ```
 
+## [Restart behavior](https://docs.docker.com/config/containers/start-containers-automatically/)
+
+Command | Description
+--- |---
+no | Do not automatically restart the container. (the default)
+on-failure 	| Restart the container if it exits due to an error, which manifests as a non-zero exit code.
+unless-stopped 	| Restart the container unless it is explicitly stopped or Docker itself is stopped or restarted.
+always 	| Always restart the container if it stops.
+
+#### Example
+
+```bash
+$ docker container run -idt --name jenkins -P --restart always jenkins:alpine
+```
+
 ## Mounting Local Volumes in a container
 
-```powershell
+```bash
 # Use -v to mount a volume
 docker container run --name repos -it -v c:/_repositories:/repositories alpine sh
 ```
@@ -112,7 +127,7 @@ docker container run --name repos -it -v c:/_repositories:/repositories alpine s
 
 ***Note:*** Refer to containers using name or (full or partial) ID
 
-```powershell
+```bash
 # rename a container
 docker rename sharp_jones mycontainer
 
@@ -159,7 +174,7 @@ docker rm mycontainer -f # remove even if running
 
 ***Note:*** [nginx](https://hub.docker.com/_/nginx) is a web server image on [Docker Hub](https://hub.docker.com/)
 
-```powershell
+```bash
 
 # Run nginx web server and map ports using -P (uppercase P)
 docker container run --name 'mywebserver' -idt -P nginx
@@ -176,7 +191,7 @@ docker container run --name 'mywebserver' -idt -p 1234:80 nginx
 
 ***Note:*** [ghost](https://hub.docker.com/_/ghost) is a CMS. *The default port is 2368.*
 
-```powershell
+```bash
 #create new container
 docker container run -itd --name ghost -p 3001:2368 ghost:alpine
 
@@ -186,7 +201,7 @@ docker start ghost
 
 ***Note:*** [Jenkins](https://hub.docker.com/r/jenkins/jenkins) is an automation engine written in Java.  *The default port is 8080.*
 
-```powershell
+```bash
 # Run Jenkins
 docker container run -idt --name 'Jenkins' -P jenkins/jenkins:lts-alpine
 
@@ -204,7 +219,7 @@ cat initialAdminPassword
 
 Create dev environments using persistent Docker containers.
 
-```powershell
+```bash
 # List local images
 docker images
 docker image ls
@@ -231,7 +246,7 @@ docker start dev-ubuntu
 
 ### Installation
 
-```powershell
+```bash
 # Create volume to persist data
 docker volume create portainer_data
 
@@ -257,7 +272,7 @@ Browse to [http://localhost:9000](http://localhost:9000) to access the Portainer
 
 ***Example -*** [Prometheus stack](https://github.com/vegasbrianc/prometheus)
 
-```powershell
+```bash
 # Clone repository containing docker-compose.yml file
 git clone https://github.com/vegasbrianc/prometheus.git
 
@@ -282,7 +297,7 @@ docker-compose down
 
 ### Prepare the image
 
-```powershell
+```bash
 # Clone example repository
 git clone https://github.com/schoolofdevops/facebooc.git
 
@@ -325,7 +340,7 @@ docker container diff fb
 
 ### Commit and push the image to Docker Hub
 
-```powershell
+```bash
 # Create an image
 docker container commit fb christopherstavros/facebooc_demo:v1
 
@@ -366,7 +381,7 @@ CMD "bin/facebooc"
 
 ### Image build process, using Dockerfile
 
-```powershell
+```bash
 # Checkout branch containing Dockerfile
 cd .\facebooc\
 git checkout docker

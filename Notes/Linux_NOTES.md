@@ -109,6 +109,26 @@ cp file SomeFolder
 watch git status
 ```
 
+# Time
+
+### View time settings
+
+```bash
+$ timedatectl
+ ```
+
+### Use local time (unsupported) to resolve Windows dual boot time issues 
+
+```bash
+$ timedatectl set-local-rtc 1 --adjust-system-clock
+```
+
+### Use UTC time (Linux default)
+
+```bash
+$ timedatectl set-local-rtc 0 --adjust-system-clock
+```
+
 # Installing programs
 
 ### apt or apt-get

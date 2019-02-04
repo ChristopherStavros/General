@@ -51,9 +51,8 @@ REINDEX DATABASE database_name
 
 ## VIEWs
 
+### Create VIEW
 ```sql
-DROP VIEW total_revenue_per_customer;
-
 CREATE VIEW total_revenue_per_customer AS
 SELECT customers.first_name, customers.last_name, sum(items.price) FROM customers
 INNER JOIN purchases on customers.id = purchases.customer_id
@@ -63,6 +62,12 @@ GROUP BY  customers.id;
 CREATE VIEW awesome_customers AS
 SELECT * FROM total_revenue_per_customer WHERE sum > 150;
 ``` 
+
+### DELETE VIEW
+
+```sql
+DROP VIEW total_revenue_per_customer;
+```
 
 ### INSERT VALUES into VIEWs
 
@@ -93,3 +98,20 @@ VALUES (11, 'Pencil', 2.00);
 **Note:** ```WITH LOCAL CHECK OPTION``` will only check the current VIEW (local) not parent or related VIEWs
 
 ```WITH CASCADED CHECK OPTION``` will check related VIEWs as well
+
+## FUNCTIONS
+
+- COUNT
+- SUM
+- AVG
+
+### AVG
+
+```sql
+-- sold items
+SELECT AVG(items.price) FROM items
+INNER JOIN purchases ON items.id = purchases.item_id;
+
+--items
+SELECT AVG(items.price) FROM items;
+```
