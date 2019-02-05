@@ -47,4 +47,31 @@ $ cat /var/jenkins_home/secrets/initialAdminPassword
   - Configure Global Security
   - Manage Plugins
 
+### Create new job
+
+ - New item - Free stye project
+   - Add build command
+ - Run build
+
+### Add build trigger to job
+
+- Trigger build remotely
+    - Use the following URL to trigger build remotely: JENKINS_URL/job/Job1/build?token=TOKEN_NAME or /buildWithParameters?token=TOKEN_NAME Optionally append &cause=Cause+Text to provide text that will be included in the recorded build cause. 
+    - Create token for job
+    - Make sure the you have a user with a API token 
+        - People/select user/configure/Select API token
+
+```bash
+curl http://hansgruber:4e8c6d45ee0f83f01478637f61a1864d@192.168.1.149:32769/job/Job1/build?token=1234
+```
+
+- Build after other projects are built
+- Build periodically
+- Poll SCM
+
+
+
+
+
+
 
