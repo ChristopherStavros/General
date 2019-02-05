@@ -51,6 +51,12 @@ $ cat /var/jenkins_home/secrets/initialAdminPassword
 
  - New item - Free stye project
    - Add build command
+
+   ```bash
+   echo "Hello world"
+   sleep 10
+   ```
+   
  - Run build
 
 ### Add build trigger to job
