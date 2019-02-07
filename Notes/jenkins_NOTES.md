@@ -1,4 +1,12 @@
-# Getting started
+---
+layout: post
+title:  "Starting with Jenkins, freestyle jobs, URL based build triggers, and pipelines"
+date:   2019-02-04 12:42:30 -0501
+categories: blog
+author: Stavros
+---
+
+Here we will launch Jenkins using Docker, look and some initial configurations, and create some simple jobs.
 
 ## Installation (using Docker)
 
@@ -75,9 +83,19 @@ curl http://hansgruber:4e8c6d45ee0f83f01478637f61a1864d@192.168.1.149:32769/job/
 - Build periodically
 - Poll SCM
 
+### Build pipelines
 
+#### Add additional jobs (2 options)
+- Post-build action
+  - Select 'Build other projects' an
+- Build triggers
+  - 'Build after other projects are
 
+### Pipleline view
 
+- Install **'Build Pipelines'** plugin
+- On main page, click plus icon
 
+https://github.com/udbc/bootcamp
 
 
