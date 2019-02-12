@@ -96,6 +96,16 @@ curl http://hansgruber:4e8c6d45ee0f83f01478637f61a1864d@192.168.1.149:32769/job/
 - Install **'Build Pipelines'** plugin
 - On main page, click plus icon
 
-https://github.com/udbc/bootcamp
+### Lab 
+
+[bootcamp](https://github.com/udbc/bootcamp)
+https://github.com/udbc
+
+### Plugins
+
+- Git
+- Maven Integration
+- NodeJS
+- Build pipeline
 
 

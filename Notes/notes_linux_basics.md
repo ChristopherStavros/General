@@ -105,8 +105,19 @@ cp file SomeFolder
 ### Monitor a program process
 
 ```bash
-#example
 watch git status
+```
+
+### Retrieve content from web server - [wget](https://en.wikipedia.org/wiki/Wget)
+
+```bash
+wget https://dl.pstmn.io/download/latest/linux64
+```
+
+### Curl
+
+```bash
+curl http://127.0.0.1:5000/ 
 ```
 
 # Time
@@ -203,3 +214,12 @@ ifconfig eth0 hw ether 00:11:22:33:44:55
 ifconfig eth0 up
 ```
 
+# Keyboard Shortcuts
+
+### Copy from terminal
+
+        Highlight text and CTRL + ALT + C
+
+### Paste in terminal
+
+        CTRL + ALT + V

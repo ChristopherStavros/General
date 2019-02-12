@@ -383,7 +383,7 @@ os.getcwd()
 
 ## JSON
 
-**Note:** JSON can be represented by dictionaries (and lists) in Python
+**Note:** JSON can be represented by dictionaries in Python
 
 ```json
 {
@@ -546,7 +546,7 @@ for m in maps:
 print(dct)
 ```
 
-### Virtual Environments - venv
+### Virtual Environments
 
 - [Python Docs - venv](https://docs.python.org/3/tutorial/venv.html)
 - [virtualenv - Older than 3.3](https://packaging.python.org/guides/installing-using-pip-and-virtualenv/)
@@ -556,23 +556,56 @@ print(dct)
 
 It is a best practive to create a virtual environment for each project.  Create the venv if a **separate folder** within your project root.
 
-```powershell
-# Create virtual environment in project folder
-python -m venv c:\path\to\myenv
+### virtualenv
+```bash
+pip3 install virtualenv
+```
+### venv
+
+```bash
+sudo apt install python3-venv
 ```
 
-Example
+### Windows Example using venv
 
 ```powershell
-PS C:\_Repositories\Python_Study\Projects\PythonStudy2\venvTest1> python -m venv C:\_Repositories\Python_Study\Projects\PythonStudy2\venvTest1
-PS C:\_Repositories\Python_Study\Projects\PythonStudy2\venvTest1> cd .\Scripts\
-PS C:\_Repositories\Python_Study\Projects\PythonStudy2\venvTest1\Scripts> .\Activate.ps1
-(venvTest1) PS C:\_Repositories\Python_Study\Projects\PythonStudy2\venvTest1\Scripts>
+python -m venv .\venvTest1
+
+.\venvTest1\Scripts\Activate.ps1
+
+decativate
 ```
 
+### Linux Example using venv
+
+```bash
+$ python -m venv venv
+
+$ source venv/bin/activate
+
+$ devactivate
+```
+
+### Linux example using virtualenv
+
+```bash
+$ virtualenv venv --python=python3.6
+
+$ source venv/bin/activate
+
+$ pip install Flask-RESTful
+
+$ deactivate
+```
 Activate/deactivate venv
 
 **NOTE:** You don’t specifically need to activate an environment; activation just prepends the virtual environment’s binary directory to your path, so that “python” invokes the virtual environment’s Python interpreter and you can run installed scripts without having to use their full path.
+
+### pip show installed items - in requirements format
+
+```bash
+$ pip3 freeze
+```
 
 ## Additional resources
 

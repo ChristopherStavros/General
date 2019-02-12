@@ -5,4 +5,4 @@ sudo apt update
 sudo apt install linux-headers-$(uname -r) dkms
 sudo apt-get install virtualbox-6.0
 cd ~/
-wget https://download.virtualbox.org/virtualbox/6.0.2/Oracle_VM_VirtualBox_Extension_Pack-6.0.0.vbox-extpack
+wget https://download.virtualbox.org/virtualbox/6.0.4/Oracle_VM_VirtualBox_Extension_Pack-6.0.0.vbox-extpack
