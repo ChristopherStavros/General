@@ -2,7 +2,7 @@
 
 [Official Documentation](https://www.postgresql.org/docs/10/index.html)
 
-# Some basics
+# First things
 
 - Tables should store data related to one thing.  Related data should be stored in separate tables.
 - In Postgres, "double quotes" are names of tables and fields, while 'single quotes' are for string constants
@@ -13,7 +13,7 @@
 
     F5
 
-### Comments
+## Comments
 
 ```sql
 /* Block comment */
@@ -21,7 +21,7 @@
 -- Single line comment
 ```
 
-# SQL - DML
+# QUERY BASICS
 
 ## SELECT
 
@@ -108,13 +108,13 @@ WHERE last_name LIKE '%t_'
 /* returns last names where 't' is the second to last character */
 ```
 
-## JOINS
+# JOINS
 
 - JOINs treat rows of data as if they were Sets
 - We can perform set operations on the tables
 - JOINs are fairly quick and do not caue a major performance hit
 
-### INNER JOIN
+## INNER JOIN
 
 - Set intersection is the elements common to two sets
 - INNER JOIN is similar to **set intersection**
@@ -126,7 +126,7 @@ WHERE last_name LIKE '%t_'
     ON Customers.ID = Orders.Customer_ID
     ```
 
-### LEFT JOIN
+## LEFT JOIN
 
 - This selects all rows from the table1 (on the left), and the rows from table2 (on the right) **if they match**
 - If they don't match, the data for the right table is blank
@@ -137,7 +137,7 @@ WHERE last_name LIKE '%t_'
     ON Customer.ID = Orders.Customer_ID
     ```
 
-### RIGHT JOIN
+## RIGHT JOIN
 
 - Opposite of LEFT JOIN
 - This selects all rows from the table2 (on the right), and the rows from table1 (on the left) **if they match**
@@ -149,7 +149,7 @@ WHERE last_name LIKE '%t_'
     ON Customer.ID = Orders.Customer_ID
     ```
 
-### FULL JOIN
+## FULL JOIN
 
 - This selects all rows from both tables, matching them if there is a match on the selected column
 
@@ -159,11 +159,11 @@ WHERE last_name LIKE '%t_'
     ON Customer.ID = Orders.Customer_ID
     ```
 
-## AGGREGATE FUNCTIONS
+# AGGREGATE FUNCTIONS
 
 **NOTE:** when grouping data using GROUP BY,  some columns may become obsolete as a result of the grouping, however you can still that data using aggregate functions such as COUNT or SUM
 
-### GROUP BY and COUNT
+## GROUP BY and COUNT
 
 Count all purchases by a customer
 
@@ -179,7 +179,7 @@ LEFT JOIN purchases ON customers.id = purchases.customer_id
 GROUP BY customers.id;
 ```
 
-### SUM
+## SUM
 
 ```sql
 SELECT customers.first_name, customers.last_name, COUNT(items.name), SUM(items.price)
@@ -195,7 +195,7 @@ FROM purchases
 INNER JOIN items ON purchases.item_id = items.id
 ```
 
-### ORDER BY and LIMIT
+## ORDER BY and LIMIT
 
 ```sql
 SELECT customers.first_name, customers.last_name, COUNT(items.name), SUM(items.price) AS "total_spent"
