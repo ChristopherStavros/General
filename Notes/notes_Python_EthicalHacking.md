@@ -1,3 +1,9 @@
+# Kali in Docker
+
+```bash
+~/Git/Python_Study/Projects/EthicalHacking$
+```
+
 # Subprocess module
 
 - [Python docs - subprocess](https://docs.python.org/3/library/subprocess.html)
@@ -18,4 +24,19 @@ subprocess.call("ls -la", shell=True)
 from subprocess import *
 p = Popen(["ping", "google.com"], stdout=PIPE)
 print(p.communicate())
+```
+
+# Change MAC address
+
+```python
+import subprocess
+
+interface =  input("interface > ")
+new_mac = input("new MAC > ")
+
+print("[+] Changing MAC address for " + interface + " to " + new_mac)
+
+subprocess.call(["ifconfig", interface, "down"])
+subprocess.call(["ifconfig", interface, "hw", "ether", new_mac])
+subprocess.call(["ifconfig", interface, "up"])
 ```

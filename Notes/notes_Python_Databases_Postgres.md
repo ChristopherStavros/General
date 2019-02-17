@@ -58,8 +58,9 @@ cursor = connection.cursor()
 
 ## Better
 
+This is a better practice than the code above since you should close your curser when you are finished using it
+
 ```python
-# This is a better practice than the code above since you should close your curser when you are finished using it
 connection = psycopg2.connect(host = "localhost", database="learning", user = "postgres", password = "P@ssw0rd")
 with connection.cursor() as cursor:
     cursor.execute('INSERT INTO users (email, first_name, last_name) VALUES (%s, %s, %s)', 
@@ -70,8 +71,9 @@ with connection.cursor() as cursor:
 
 ## Even better
 
+This is a better practice than the code above because we always want to commit our changes and close the connection
+
 ```python
-# This is a better practice than the code above because we always want to commit our changes and close the connection
 with psycopg2.connect(host = "localhost", database="learning", user = "postgres", password = "P@ssw0rd") as connection:
     with connection.cursor() as cursor:
         cursor.execute('INSERT INTO users (email, first_name, last_name) VALUES (%s, %s, %s)', 
@@ -80,8 +82,9 @@ with psycopg2.connect(host = "localhost", database="learning", user = "postgres"
 
 ## Better still
 
+Define the connection string in a separate function in database.py to make code more succinct
+
 ```python
-# Define the connection string in a separate function in database.py to make code more succinct
 import psycopg2
 
 def connect():
@@ -102,7 +105,7 @@ with connect() as connection:
 
 - If you execute a change but do not commit the change then the transaction will take place however the data wlll not be saved.
 - This be be illustrated when using sequences.  The sequence will still increment even though no data is commited.
-- Usng the 'with' construct will automatically commit changes and close the connection
+- Using the 'with' construct will automatically commit changes and close the connection
 
 # Connection pools
 
@@ -113,16 +116,22 @@ with connect() as connection:
 
 ## ...and better still (but still not great)- using Connection pools...incorrectly
 
+Create a connection pool in a separate function in database.py to make code more succinct
+
 ```python
-# Create a connection pool in a separate function in database.py to make code more succinct
 from psycopg2 import pool
-connection_pool = pool.SimpleConnectionPool(1, 10,  #maxconn...number of initial connections, max number of connections pool can handle
+connection_pool = pool.SimpleConnectionPool(1, 10,
                                             host = "localhost", 
                                             database="learning", 
                                             user = "postgres", 
                                             password = "P@ssw0rd") 
+```
 
-#In another file
+**NOTE:** The first and second arguments passed to the 'SimpleConnectionPool' are - the number of initial connections, max number of connections pool can handle
+
+In another file
+
+```python
 from database import connection_pool
 
 connection = connection_pool.getconn()
@@ -132,12 +141,17 @@ with connection.cursor() as cursor:
 connection_pool.putconn(connection)
 ```
 
-**Note:** This code is still a problem because you need to put the connection back into the pool every time.  IF you were to return some values and where then unable to return the connection, this could cause an error to be thrown.  
+**Note:** This code is still a problem because you need to put the connection back into the pool every time.  
+
+If you were to return some values and where then unable to return the connection, this could cause an error to be thrown.  
+
 We still need to find a way to use the 'with' construct here, which will require some more programming as psycopg2 does not handle this out of the box.
 
 ## Using 'with' and connection pools - still not quite right
 
-**Note:** This attempt is using the with construct to create connection pools, however while the run works, it actually creates multiple connection pools, which is even more inefficient that just creating multiple connection (as in on the the earlier examples).  With this current code, a new connection pool object is created every time that ```with ConnectionPool() as connection:``` runs.  This is bad.
+**Note:** This attempt is using the with construct to create connection pools, however while the run works, it actually creates multiple connection pools, which is even more inefficient that just creating multiple connection (as in on the the earlier examples).   
+
+With this current code, a new connection pool object is created every time that ```with ConnectionPool() as connection:``` runs.  This is bad.
 
 database.py
 
@@ -146,7 +160,7 @@ from psycopg2 import pool
 
 class ConnectionPool:
     def __init__(self):
-        connection_pool = pool.SimpleConnectionPool(1, 10,  #maxconn...number of initial connections, max number of connections pool can handle
+        connection_pool = pool.SimpleConnectionPool(1, 10,
                                             host = "localhost", 
                                             database="learning", 
                                             user = "postgres", 
@@ -180,7 +194,7 @@ database.py
 ```python
 from psycopg2 import pool
 
-connection_pool = pool.SimpleConnectionPool(1, 10,  #maxconn...number of initial connections, max number of connections pool can handle
+connection_pool = pool.SimpleConnectionPool(1, 10,
                                     host = "localhost", 
                                     database="learning", 
                                     user = "postgres", 
@@ -247,7 +261,7 @@ database.py
 ```python
 from psycopg2 import pool
 
-connection_pool = pool.SimpleConnectionPool(1, 10,  #maxconn...number of initial connections, max number of connections pool can handle
+connection_pool = pool.SimpleConnectionPool(1, 10,
                                     host = "localhost", 
                                     database="learning", 
                                     user = "postgres", 
@@ -290,3 +304,8 @@ def save_to_db(self):
 
 - from users import User
   - a file is run to make classes within the file available
+- Python code needs to be compiled and imports need to be cleared
+
+# Make variables private in Python
+
+Add two underscores in front

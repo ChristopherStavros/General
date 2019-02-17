@@ -1,0 +1,20 @@
+.Header{
+    color: blue;
+}
+.Title{
+    text-align: center;
+}
+.Content{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 20px;
+    border: 1px;
+    border-color: bisque;
+    border-style: ridge;
+    margin: 100px;
+    padding: 10px;
+}
+#ListDiv{
+    background-color: blueviolet;
+    color: greenyellow;
+    width: 100%;
+}

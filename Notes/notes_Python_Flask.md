@@ -12,6 +12,10 @@ def home():
 app.run(port=5000)
 ```
 
+```bash
+curl http://localhost:5000
+```
+
 # Flask and Docker
 
 https://medium.com/@mtngt/docker-flask-a-simple-tutorial-bbcb2f4110b5

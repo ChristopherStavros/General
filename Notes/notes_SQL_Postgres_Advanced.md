@@ -186,8 +186,51 @@ SELECT timestamp '2005-10-10 5:16:45';
 SELECT timestamp '2005-10-10 5:16:45.123'
 ```
 
-## Convert timestand
+## Convert from timestand
 
 ```sql
 SELECT NOW();
+SELECT TO_CHAR(NOW(), 'DD-MM-YY');_
+SELECT TO_CHAR(NOW(), 'MMyoyoyoyDD:):):)YYYYYYYY');
+SELECT TO_CHAR(NOW(), 'FMDay DDth FMMonth, MM-DD-YYYY HH:MM:SS');
 ```
+
+## Convert to timestamp
+
+```sql
+SELECT TO_TIMESTAMP('	Thursday 14th February, 02-14-2019 12:02:42', 'FMDay DDth FMMonth, MM-DD-YYYY HH:MM:SS');
+```
+
+# Other data types
+
+## Storing images and other binary files - BYTEA
+
+```sql
+BYTEA
+```
+
+## ENUM
+
+Limit the values allowed for a particular TYPE
+
+**NOTE:** ENUMs are ordered (start at 0), and therefore we can filter ENUM results
+
+```sql
+CREATE TYPE mood AS ENUM('extrememly unhappy', 'unhappy', 'ok', 'happy', 'extremely happy');
+
+CREATE TABLE people(
+    name CHARACTER varying (255),
+    current_mood mood
+);
+
+INSERT INTO people VALUES('HansGruber', 'unhappy');
+INSERT INTO people VALUES('Jake', 'happy');
+
+SELECT * FROM people WHERE current_mood > 'ok';
+```
+
+## Store JSON in database
+
+Postgres can store JSON (this is new to Postgres)
+
+# NEsted SELECT statements

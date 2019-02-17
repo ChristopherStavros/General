@@ -78,6 +78,12 @@ $ git add -A
 $ git reset
 ```
 
+### Unstage specific file
+
+```bash
+$ git rm --cached <file>
+```
+
 ### View status message
 
 ```bash

@@ -277,10 +277,94 @@ df7 = df7.set_index("Address")
 
 ### Not inline - assign to variable to save change
 
+```python
+df.drop(rowIndex, 0)
+```
+
 ![drop](./Images/10RWP/drop.png)
 
 ![drop](./Images/10RWP/drop2.png)
 
 ## Delete columns
 
+```python
+df.drop("Column(s)", 1)
+```
+
 ![drop](./Images/10RWP/drop3.png)
+
+## Get number of rows in dataframe
+
+```pyhon
+df7.shape[0]
+```
+
+## Add column
+
+This **is** an in-place operation
+
+```python
+df7["Continent"]= df7.shape[0]*["North America"]
+```
+
+```python
+df7["Continent"]= df7["Country"] + ", " + "North America"
+```
+
+## Add row (this is tricky)
+
+#### T 'transposes' dataframe
+
+```python
+# New dataframe flipped on it's side
+df7_t = df7.T
+```
+
+#### Add a 'column' and flip table back
+
+```python
+df7_t[6]=["123 Skeet Street", "New York", "USA", 10, 7, "Store Shop", "New York", "USA, North America"]
+df7_t
+
+df7 = df7_t.T
+df7
+```
+![row](./Images/10RWP/addrow.png)
+
+# Geocoding (requires internet)
+
+```bash
+pip3 install geopy
+```
+
+```python
+from geopy.geocoders import ArcGIS
+gis = ArcGIS()
+g = gis.geocode('3995 23rd St, San Francisco, CA, 94134')
+g.latitude
+g.longitude
+```
+
+![geo1](./Images/10RWP/geocode1.png)
+
+### Add coordinates to column in dataframe
+```python
+import pandas
+df = pandas.read_csv("http://pythonhow.com/supermarkets.csv")
+
+df["Full_Address"] = df["Address"] + " , " + df["City"] + " , " + df["State"] + " , " + df["Country"]
+
+df["Coordinates"] = df["Full_Address"].apply(gis.geocode)
+df.Coordinates[0].latitude
+
+#or
+df["Latitude"] = (df["Full_Address"].apply(gis.geocode)).apply(lambda x : x.latitude)
+df["Longitude"] = (df["Full_Address"].apply(gis.geocode)).apply(lambda x : x.longitude)
+```
+
+#### Dealing with None values
+
+```python
+df["Longitude"] = (df["Full_Address"].apply(gis.geocode)).apply(lambda x : x.longitude if x!= None else None)
+df
+```

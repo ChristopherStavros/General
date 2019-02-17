@@ -90,6 +90,12 @@ touch my_file.txt
 > my_file.txt
 ```
 
+### Read file
+
+```bash
+cat file
+```
+
 ### Remove file
 
 ```bash
@@ -100,6 +106,12 @@ rm my_file
 
 ```bash
 cp file SomeFolder
+```
+
+### Move or rename file
+
+```bash
+mv file file_or_folder
 ```
 
 ### Monitor a program process

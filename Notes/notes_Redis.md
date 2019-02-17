@@ -1,8 +1,12 @@
+# What is redis?
+
+[Redis](https://redis.io/topics/introduction) is an open source (BSD licensed), in-memory data structure store, used as a database, cache and message broker. It supports data structures such as strings, hashes, lists, sets, sorted sets with range queries, bitmaps, hyperloglogs, geospatial indexes with radius queries and streams. - redis.io
+
 # Getting started
 ## Run redis:alpine Docker container with default port mapping
 
 ```bash
-#Using default port mapping (redis port is 32768:6379)
+#Using default port mapping (32768:6379)
 docker container run -idt --name redis -P redis:alpine
 ```
 
@@ -20,14 +24,16 @@ redis-cli -p 32768
 
 # Commands
 
-- ADD
-- GET
-- DEL
-- HGET => Returns value for single key passed
-- HSET => set/updates value for the single key
-- HMGET => Returns value for single/multiple keys passed
-- HMSET => set/updates values for the multiple key
-- HGETALL => Returns all the (key, value) pairs in the mapping.
+Command | Description
+--- | ---
+ADD | 
+GET | 
+DEL | 
+HGET | Returns value for single key passed
+HSET | Set/updates value for the single key
+HMGET | Returns value for single/multiple keys passed
+HMSET | Set/updates values for the multiple key
+HGETALL | Returns all the (key, value) pairs in the mapping.
 
 ## Set Key
 
@@ -54,14 +60,16 @@ OK
 
 ## Redis commands and their respective methods in redis-py library
 
-- ADD => add
-- GET => get
-- DEL => delete
-- HGET => hget
-- HSET => hset
-- HMGET => hmget
-- HMSET => hmset
-- HGETALL => hgetall
+Redis Command | redis.py library
+--- | ---
+ADD | add
+GET | get
+DEL | delete
+HGET | hget
+HSET | hset
+HMGET | hmget
+HMSET | hmset
+HGETALL | hgetall
 
 ### Quick and dirty Python example
 

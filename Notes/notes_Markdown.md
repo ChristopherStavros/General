@@ -1,6 +1,6 @@
 # This is markdown
 
-### List
+### Lists (orders and unordered)
 
 1. Stuff
 1. More Stuff
@@ -8,38 +8,26 @@
    - Something else
 1. Even more stuff
 
-## Cat
+## Images
 
-![alt text](https://www.catster.com/wp-content/uploads/2017/08/A-fluffy-cat-looking-funny-surprised-or-concerned.jpg "Steezcorp")
+![alt text](https://www.catster.com/wp-content/uploads/2017/08/A-fluffy-cat-looking-funny-surprised-or-concerned.jpg "Cat")
 
-### PowerShell Code Block
+## Image with Link
+
+[![Sex Pistol Interview](./Images/sexpistolsinterview.png)](https://youtu.be/LtHPhVhJ7Rs)
+
+### Code Block
 
 ```powershell
 
 Get-ChildItem -Path c:\ | Get-Member
 
 ```
-### XML Code Block
-
-```xml
-
-<stuff>
-    <1>yo</1>
-</stuff>
-
-```
-### Termianl
-
-```terminal
-
-sudo 
-
-```
 
 ### Table
 
-1 | 2__________ | 333333333 |
---- | :---: | ---:|
+1 | 2__________ | 333333333
+--- | :---: | ---:
 Lets | Do  | This
 
 
