@@ -327,58 +327,12 @@ while len(values) < 6:
 
 - Basically identical to list comprehension except result is a set
 
-## Classes
-
-```python
-class User:
-     # set parameters for object
-    def __init__(self, name):
-        self.name = name
-
-    # define a string that represents the object
-    def __repr__(self):
-        return "<User {}>".format(self.name)
-
-    @classmethod
-    def do_something(cls):
-        return "This is a class method"
-```
-
-```python
-my_user = User('Hans_Gruber')
-
-User.do_something()
-```
-
-**Note:** 'self' refers to the **currently bound object** (my_user, in the example above)
-
-## Class methods and static methods
-
-https://stackoverflow.com/questions/136097/what-is-the-difference-between-staticmethod-and-classmethod
-
 ## Lambda functions
 
 ```python
-# Lamda functions are unnamed functions
+# Lambda functions are unnamed functions
 # Each element is passed to the function and processed
-{lamda x '''the parameter name''': x.watched '''processing''',  self.movies '''the parameter value for x'''}
-```
-
-## Get path of current script
-
-```python
-#Set script path and remove trailing \ if path is c:\
-import os, sys
-
-scriptPath = os.path.dirname(sys.argv[0])
-if scriptPath[-1:]=='\\':
-    scriptPath = scriptPath.strip('\\')
-```
-
-## Get CWD
-
-```python
-os.getcwd()
+{lambda x '''the parameter name''': x.watched '''processing''',  self.movies '''the parameter value for x'''}
 ```
 
 ## JSON

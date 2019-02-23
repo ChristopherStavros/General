@@ -24,6 +24,14 @@ Get-ChildItem -Path c:\ | Get-Member
 
 ```
 
+### Quotes
+
+> "No guts no glory" - Goldrush
+
+### Bold and italics
+
+**Bold** text and _italics_ and _**Bold_with_italics**_
+
 ### Table
 
 1 | 2__________ | 333333333

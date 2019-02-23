@@ -33,7 +33,7 @@ $ git --version
 
 ```bash
 $ git config --global user.name "name"
-$ git config --global user.email "a@a.com"Working with 
+$ git config --global user.email "a@a.com"
 $ git config --global color.ui auto
 $ git config --global core.editor vim
 ```
@@ -104,6 +104,12 @@ $ git commit -a --message "Added stuff" # or -m to add commit message
 
 ```bash
 $ git log
+
+# Shortened version
+$ git log --oneline
+
+# Graphical representation of commits
+$ git log --graphlog
 ```
 
 ### View unstaged edits

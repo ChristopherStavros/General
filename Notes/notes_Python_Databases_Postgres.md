@@ -309,3 +309,7 @@ def save_to_db(self):
 # Make variables private in Python
 
 Add two underscores in front
+
+# Resources
+
+[Security - pgpass](https://stackoverflow.com/questions/28800880/python-connect-to-postgresql-with-libpq-pgpass)

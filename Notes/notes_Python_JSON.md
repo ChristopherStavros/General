@@ -1,0 +1,4 @@
+- json.load
+  - load from file
+- json.loads
+  - load from string

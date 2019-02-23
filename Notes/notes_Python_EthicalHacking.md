@@ -1,7 +1,15 @@
 # Kali in Docker
 
+This is perhaps not a great way to go?
+
 ```bash
-~/Git/Python_Study/Projects/EthicalHacking$
+docker container run -idt --name kali -v ~/Git/Python_Study/Projects/EthicalHacking:/scripts kalilinux/kali-linux-docker sh
+
+docker exec -it kali sh
+
+$ apt update
+$ apt install python3
+$ apt install net-tools
 ```
 
 # Subprocess module
