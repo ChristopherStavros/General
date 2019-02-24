@@ -1,0 +1,2 @@
+[Mysql install - Ubuntu](https://support.rackspace.com/how-to/installing-mysql-server-on-ubuntu/)  
+[Mysql workbench install - Ubuntu](https://www.linode.com/docs/databases/mysql/install-and-configure-mysql-workbench-on-ubuntu/)  

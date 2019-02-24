@@ -517,6 +517,82 @@ for m in maps:
 print(dct)
 ```
 
+## ZIP
+
+### Iterate through two list
+
+```python
+for i,j in zip([1,2,3], [4,5,6]):
+    print(i, "and", j)
+
+#output
+1 and 4
+2 and 5
+3 and 6
+```   
+
+### Real world example
+
+```python
+import folium
+import pandas
+
+# Get volcanoes from CSV file and create Pandas Data Frame
+data = pandas.read_csv('Volcanoes.csv')
+
+# Create lists from columns
+lat = list(data["LAT"])
+lon = list(data["LON"])
+elev = list(data["ELEV"])
+name = list(data["NAME"])
+
+# Base map
+map1 = folium.Map(location=[42, -122], zoom_start=5, tiles="Mapbox Bright")
+
+# Define feature goup
+fg = folium.FeatureGroup(name="My Map")
+
+# Add markers to feature group
+for lt, ln, nm, el in zip(lat, lon, name, elev):
+    fg.add_child(folium.Marker(location=[lt, ln], popup="{}, {} meters".format(nm, el), icon=folium.Icon(color='green')))
+    #NOTE to convert float to a string - popup = folium.Popup(str(el).parse_html=True)
+
+# Add feature group to map
+map1.add_child(fg)
+
+# Save map to file
+map1.save("Map1.html")
+
+import folium
+import pandas
+
+# Get volcanoes from CSV file and create Pandas Data Frame
+data = pandas.read_csv('Volcanoes.csv')
+
+# Create lists from columns
+lat = list(data["LAT"])
+lon = list(data["LON"])
+elev = list(data["ELEV"])
+name = list(data["NAME"])
+
+# Base map
+map = folium.Map(location=[42, -122], zoom_start=5, tiles="Mapbox Bright")
+
+# Define feature goup
+fg = folium.FeatureGroup(name="My Map")
+
+# Add markers to feature group
+for lt, ln, nm, el in zip(lat, lon, name, elev):
+    fg.add_child(folium.Marker(location=[lt, ln], popup="{}, {} meters".format(nm, el), icon=folium.Icon(color='green')))
+
+
+# Add feature group to map
+map.add_child(fg)
+
+# Save map to file
+map.save("Map1.html")
+```
+
 
 ## Additional resources
 
