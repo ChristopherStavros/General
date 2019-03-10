@@ -335,6 +335,12 @@ while len(values) < 6:
 {lambda x '''the parameter name''': x.watched '''processing''',  self.movies '''the parameter value for x'''}
 ```
 
+```python
+l = lambda x: x**2
+l(5)
+25
+```
+
 ## JSON
 
 **Note:** JSON can be represented by dictionaries in Python

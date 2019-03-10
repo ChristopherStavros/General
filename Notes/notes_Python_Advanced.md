@@ -1,3 +1,50 @@
+# Datetime
+
+### [Codes](http://strftime.org/
+)
+```python
+from datetime import datetime
+
+delta = datetime.now() - datetime(1900, 12, 31, 5, 20, 22, 91929)  # (YYYY, MM, DD, h, m, s, ms)
+
+now = datetime.now()
+then = datetime(1900, 12, 31)
+
+whenever = datetime.strptime("2017-12-31", "%Y-%m-%d")
+whenever2 = datetime.strptime("2017:12:31:20:59", "%Y:%m:%d:%H:%M")
+
+print(delta.days)
+print(delta.seconds)
+print(now - then)
+print(whenever)
+print(whenever2)
+
+# Convert to string with a particualr format
+whenever.strftime("%Y-%m-%d %H:%M")
+```
+
+# Background process
+
+### Windows
+
+- .pyw extension for Python scripts will allow them to run as a background process
+- Scheduled task - set trigger to pyw file (no need to call python first)
+
+### Linux / Mac
+
+#### Cron
+
+##### Add value to cron table
+
+```bash
+sudo crontab -e
+```
+
+##### In text editor, add
+
+    @reboot python3 /pathtofile/file.py
+
+
 # OOP
 
 ## Classes
@@ -122,4 +169,86 @@ print(Chair(5))
 
 Hiding the inner workings of a class when showing those inner workings is not necessary
 
+# Some more built in methods
+
+### Covered elsewhere
+
+1. __init__
+1. __repr__
+
+## Or
+
+```python
+def to_usd(self, amount = None):
+    #to_convert = amount if amount is not None else self.amount
+    to_convert = amount or self.amount # TRICK - shorthand for above
+    return to_convert * self.exchange_to_usd
+```
+
+## __eq__, __gt__ , __lt__, __le__, __ge__
+
+Define equal, greater than, less than.... methods
+
+```python
+class Currency:
+    def __init__(self, code, exchange_to_usd):
+        self.amount = 0.00
+        self.code = code
+        self.exchange_to_usd = exchange_to_usd
+
+    def set_amount(self, amount):
+        self.amount = amount
+
+    def in_currency(self, amount):
+        return amount / self.exchange_to_usd
+    
+    def to_usd(self, amount = None):
+        #to_convert = amount if amount is not None else self.amount
+        to_convert = amount or self.amount # TRICK - shorthand for above
+        return to_convert * self.exchange_to_usd
+
+    def __eq__(self, other):
+        return self.to_usd() == other.to_usd()
+
+    def __gt__(self, other):
+        return self.to_usd() > other.to_usd()
+
+    def __lt__(self, other):
+        return self.to_usd() < other.to_usd()
+
+    def __le__(self, other):
+        return self.to_usd() <= other.to_usd()
+
+    def __ge__(self, other):
+        return self.to_usd() >= other.to_usd()
+
+pounds = Currency("GBP", 1.21)
+pounds.set_amount(1000)
+euros = Currency("EUR", 1.07)
+euros.set_amount(1000)
+
+print(pounds == euros)
+print(pounds > euros)
+print(pounds < euros)
+print(pounds <= euros)
+print(pounds >= euros)
+
+```
+
+# Assertions
+
+- Use assertions if you may want to turn them off later to improve performance (High permormance mode will remove assertions)
+- Otherwise, raise exceptions 
+
+```python
+def divide_secure(number, divisor):
+    # if divisor == 0:
+    #     raise ValueError("The divisor is 0!")
+
+    assert divisor != 0  # basically same as above
+
+    return number / divisor
+
+divide_secure(10, 0)
+```
 
