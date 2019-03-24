@@ -203,8 +203,73 @@ year_study |
 - Just like the size() method
 - We visit all the Nodes, but instead of increasing a variable, we print the Node's details out
 
+# The Stack
+
+- It is similar to a queue
+- Instead of First-in-First-Out (FIFO) it's Last-In-First-Out (LIFO)
+
+## What does a stack do?
+
+- Add elements at the beginning
+- Remove elements from the beginning
+- Find its size
+- Print itself
+
+## The end or the beginning?
+
+- Remember, instead of adding and removing from the beginning
+  - We can add and remove from the end
+  - As long as both operations happen on the same end, it will end up being the same
+
+![alt text](/Images/data_structures/stack1.png "Stack1")
+
+## Adding Nodes
+
+- Make the new Node point to the current head
+- Make the head of the stack be the new Node
+- Just like the linkedLIst class we created, where the add_to_list() method would add new Nodes at the beginning
+
+## Removing Nodes
+
+- Make the head of the stack the second NOde in the Stack
+- This way we are skipping the first Node
+- And it gets erased from the computer's memory by Python
+
+## The rest
+
+- Same as with the Queue
+
+# Binary Trees
+
+## What is a binary tree?
+
+- It is unlike any data strucure that we have seen
+- Unlike a sequence of items or a group of items, this is a branching structure, just like a tree
+
+## Binary tree Nodes
+
+- A Node "points" to two Nodes, its right child and its left child
+- Nodes are ordered with a key you select
+- The right child will have a greater key than the parent
+- The left child will have a smaller key than the parent
 
 
+
+# Adding a new Node
+
+- We have a Node we are trying to add
+- If its key is greater than the current Node, we move down the right, making the current Node equal to its right child
+- If its key is smaller than the current Node, we make the current Node equal to its left child
+- If the key is the same, we stop, because we don't want duplicates
+- If the current Node is null, we make it equal to the Node we are trying to add
+
+# Finding
+
+- Finding a Node is similar to adding a Node
+- If the key of the Node we are looking for is greater than the current Node, we go the the right
+- If the current key of the Node we are looking for is smaller than the current Node, we go to the left
+- If the current Node is null, we haven't found it
+- If the current Node's key is equal to the key of the Node we were looking for, we have found Node!
 
 
 

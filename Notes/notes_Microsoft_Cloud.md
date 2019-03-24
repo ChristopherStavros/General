@@ -5,6 +5,7 @@
 # Azure
 
 [Roles](https://docs.microsoft.com/en-us/azure/active-directory/users-groups-roles/directory-assign-admin-roles)
+
 # Graph API
 
 - [Overview](https://docs.microsoft.com/en-us/graph/overview)  
@@ -12,17 +13,17 @@
 
 # Intune
 
-## Automation
+## Automation and Data
 
 [Nicolaj](https://www.scconfigmgr.com/2017/03/21/getting-started-with-microsoft-intune-and-powershell/)
 
-[Github - Intune samples](https://github.com/microsoftgraph/powershell-intune-samples)
+[Github - Graph PowerShell Intune samples](https://github.com/microsoftgraph/powershell-intune-samples)
 
 [Intune PowerShell SDK](https://github.com/Microsoft/Intune-PowerShell-SDK)
 
 [Process automation with Azre Automation](https://oliverkieselbach.com/2018/02/25/process-automation-for-intune-and-azure-ad-with-azure-automation/)
 
-## Settings
+## Settings and Actions
 
 [MDM Security Baseline](https://techcommunity.microsoft.com/t5/Enterprise-Mobility-Security/Microsoft-Intune-introduces-MDM-Security-Baselines-to-secure-the/ba-p/313442)
 
