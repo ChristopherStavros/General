@@ -1,7 +1,6 @@
 # Datetime
 
-### [Codes](http://strftime.org/
-)
+### [Codes](http://strftime.org/)
 ```python
 from datetime import datetime
 
@@ -252,3 +251,48 @@ def divide_secure(number, divisor):
 divide_secure(10, 0)
 ```
 
+# Lambdas
+
+## Basic lambda function
+```python
+l = lambda x: x**2
+l(5)
+25
+```
+
+## Takes in a paramter x and returns whether x is greater than 5
+
+```python
+l = lambda x : x > 5
+
+print(l(10))
+
+''' same
+def l(x):
+    return x > 5
+
+print(l(10))
+'''
+```
+
+## Get a new list in the check function is true
+
+### Lambda functions are cheaper in terms of performance than creatng full blown functions
+
+```python
+def alter(values, check):
+    #return list(filter(check, values))   # SAME
+    return [val for val in values if check(val)] # this is more pythonic than filter method
+
+my_list = [1,2,3,4,5]
+another_list = alter(my_list, lambda x: x!=5)
+print(another_list)
+
+'''same
+def check_not_five(x):
+    return x != 5
+
+another_list = alter(my_list, check_not_five)
+print(another_list)
+'''
+```
