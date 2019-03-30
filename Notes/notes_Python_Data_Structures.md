@@ -221,7 +221,9 @@ year_study |
   - We can add and remove from the end
   - As long as both operations happen on the same end, it will end up being the same
 
-![alt text](/Images/data_structures/stack1.png "Stack1")
+![alt text](/Images/data_structures/Stack1_.PNG "Stack1")
+
+![alt text](/Images/data_structures/Stack2.PNG "Stack2")
 
 ## Adding Nodes
 
@@ -253,7 +255,23 @@ year_study |
 - The right child will have a greater key than the parent
 - The left child will have a smaller key than the parent
 
+![alt text](/Images/data_structures/btree1.png "Binary Tree 1")
 
+![alt text](/Images/data_structures/btree2.png "Binary Tree 2")
+
+![alt text](/Images/data_structures/btree3.png "Binary Tree 3")
+
+![alt text](/Images/data_structures/btree4.png "Binary Tree 4")
+
+![alt text](/Images/data_structures/btree5.png "Binary Tree 5")
+
+![alt text](/Images/data_structures/btree6.png "Binary Tree 6")
+
+![alt text](/Images/data_structures/btree7.png "Binary Tree 7")
+
+![alt text](/Images/data_structures/btree8.png "Binary Tree 8")
+
+![alt text](/Images/data_structures/btree9.png "Binary Tree 9")
 
 # Adding a new Node
 
