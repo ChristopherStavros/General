@@ -19,10 +19,11 @@
 
 ## Automation and Data
 
-[Nicolaj](https://www.scconfigmgr.com/2017/03/21/getting-started-with-microsoft-intune-and-powershell/)
-[Github - Graph PowerShell Intune samples](https://github.com/microsoftgraph/powershell-intune-samples)
-[Intune PowerShell SDK](https://github.com/Microsoft/Intune-PowerShell-SDK)
-[Process automation with Azre Automation](https://oliverkieselbach.com/2018/02/25/process-automation-for-intune-and-azure-ad-with-azure-automation/)
+- [Nicolaj](https://www.scconfigmgr.com/2017/03/21/getting-started-with-microsoft-intune-and-powershell/)
+- [Github - Graph PowerShell Intune samples](https://github.com/microsoftgraph/powershell-intune-samples)
+- [Intune PowerShell SDK](https://github.com/Microsoft/Intune-PowerShell-SDK)
+  - [PowerShell Gallery](https://www.powershellgallery.com/packages/Microsoft.Graph.Intune/6.1902.1.10)
+- [Process automation with Azure Automation](https://oliverkieselbach.com/2018/02/25/process-automation-for-intune-and-azure-ad-with-azure-automation/)
 
 ## Settings and Actions
 
