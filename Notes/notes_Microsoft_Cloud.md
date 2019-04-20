@@ -30,6 +30,7 @@
 [MDM Security Baseline](https://techcommunity.microsoft.com/t5/Enterprise-Mobility-Security/Microsoft-Intune-introduces-MDM-Security-Baselines-to-secure-the/ba-p/313442)
 [Map network drive](https://tech.nicolonsky.ch/intune-execute-powershell-script-on-each-user-logon/)
 [Run scripts](https://www.eshlomo.us/run-powershell-via-microsoft-intune/)
+<<<<<<< HEAD
 
 # Graph - Oauth - Flask
 
@@ -38,3 +39,6 @@ https://github.com/microsoftgraph/python-sample-auth/blob/master/sample_flask.py
 # Graph - ADAL - Flask
 
 https://azure.microsoft.com/en-us/resources/samples/active-directory-python-webapp-graphapi/
+
+[MAM](https://www.windowsmanagementexperts.com/mobile-application-management-mam-and-intune/mobile-application-management-mam-and-intune.htm)
+
