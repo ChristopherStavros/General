@@ -280,6 +280,7 @@ print(l(10))
 ### Lambda functions are cheaper in terms of performance than creatng full blown functions
 
 ```python
+# Note that in this example 'check' is a lamdba FUNCTION!!
 def alter(values, check):
     #return list(filter(check, values))   # SAME
     return [val for val in values if check(val)] # this is more pythonic than filter method
@@ -296,3 +297,27 @@ another_list = alter(my_list, check_not_five)
 print(another_list)
 '''
 ```
+
+#### Another example
+
+```python
+items = []
+
+class Item(Resource):
+    def get(self, name):
+        item = next(filter(lambda x: x['name']==name, items), None)
+        return {'item': item}, 200 if items else 404
+```
+
+#### Another simpler example with Lambdas and Filter
+
+```python
+items = ["Hans", "Gruber"]
+name = "Gruber"
+stuff = next(filter(lambda x: x==name, items))
+print(stuff)
+```
+
+# Resources
+
+[Map, filter, reduce](http://book.pythontips.com/en/latest/map_filter.html)
