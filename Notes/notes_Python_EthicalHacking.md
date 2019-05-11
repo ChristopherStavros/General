@@ -48,3 +48,16 @@ subprocess.call(["ifconfig", interface, "down"])
 subprocess.call(["ifconfig", interface, "hw", "ether", new_mac])
 subprocess.call(["ifconfig", interface, "up"])
 ```
+
+# Network Scanning
+
+## NetDiscover (other program NMap)
+
+## Scapy !
+
+https://scapy.readthedocs.io/en/latest/
+
+
+# Windows VMs
+
+https://developer.microsoft.com/en-us/microsoft-edge/tools/vms/
