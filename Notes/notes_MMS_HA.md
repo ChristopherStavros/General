@@ -1,0 +1,2 @@
+- SCCM connects to HA listener
+- SCCM not supported with SQL standard
