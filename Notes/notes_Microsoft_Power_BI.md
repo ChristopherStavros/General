@@ -161,10 +161,24 @@ SalesPerUnit = [TotalRevenue]/(RELATED('Calculated-Columns-Units'[Units sold A])
 PopulationFemale = CALCULATE(SUM('FACT-Population'[Population]), FILTER('FACT-Population', 'FACT-Population'[Gender] = "Female"))
  ```
 
+```dax
+Population % Female in Total = [PopulationFemale]/[PopulationTotal]
+```
+
 - A measure is only a single value
 - You cannot see it in the body of the data model
 - You can only see it when you use it in a visualization
 - Measure are only calculated when you use them, which makes them less memory intensive than a calculated column
+
+## Data Categorization
+
+#### Modeling tab\Properties
+
+- Country
+- City
+- Latitude
+- Longitude
+- etc.
 
 ## Tips and shortcuts
 
@@ -179,6 +193,28 @@ Left and right arrows
 ### Select multiple items
 
 Selelct item, hold shift and select another item
+
+# Visualizations
+
+- Value
+- Axis
+- Legend
+- Tooltip
+- Edit interaction
+  - Filter
+  - Highlight
+  - None
+- Data labels
+- Data Colors
+  - Advanced\Color Scale
+- Sorting
+  - Click the three dots on the top right of a visualization
+- Drilling
+  - Add heirarchy
+    - Drag drilling fileds to heirachy and add heirarchy to chart
+- Format Painter
+  - Apply one visualization's formatting to another visualization
+
 ## Resources
 
 - [Power BI and Active Directory](https://biinsight.com/power-bi-and-active-directory-for-system-administrators/)
