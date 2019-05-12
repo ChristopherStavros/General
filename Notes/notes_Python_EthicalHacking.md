@@ -57,6 +57,47 @@ subprocess.call(["ifconfig", interface, "up"])
 
 https://scapy.readthedocs.io/en/latest/
 
+### Send'n'receive
+
+https://scapy.readthedocs.io/en/latest/usage.html
+
+# ARP
+
+## arp table
+```bash
+arp
+# or add -a in Windows
+```
+
+**NOTE** This appears to reset after a reboot
+
+[When are ARP tables updated?](https://networkengineering.stackexchange.com/questions/22980/when-will-an-arp-table-be-updated)
+
+## ARP spoofing - Man in the middle
+
+- Kali - arpspoof
+
+```bash
+arpspoof -i eth0 -t 10.0.2.7 10.0.2.1
+```
+
+```bash
+arpspoof -i eth0 -t 10.0.2.1 10.0.2.7
+```
+
+### Enable port forwarding
+
+THs allows packet to run through the "hacker" computer
+
+```bash
+echo 1 > /proc/sys/net/ipv4/ip_forward
+```
+
+# Routing table
+
+```bash
+route -n
+```
 
 # Windows VMs
 
